@@ -66,6 +66,7 @@ abstract class ScriptGenerator(fileName: String) {
                     ", $start, $end" + if (step != -1.0) ", $step" else ""
                 } ?: "")
             }
+            is Boolean -> "bool"
             is Color -> ""
             else -> {
                 defaultValue?.let {

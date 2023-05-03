@@ -15,87 +15,92 @@ val directions = arrayOf(Vector3.UP, Vector3.DOWN, Vector3.LEFT, Vector3.RIGHT, 
 
 @RegisterClass
 class Planet : Spatial() {
-    private var meshInstances = arrayOf<MeshInstance>()
-    private var terrainFaces = arrayOf<TerrainFace>()
+	private var meshInstances = arrayOf<MeshInstance>()
+	private var terrainFaces = arrayOf<TerrainFace>()
 
-    private lateinit var shapeGenerator: ShapeGenerator
+	private lateinit var shapeGenerator: ShapeGenerator
 
-    @Export
-    @RegisterProperty
-    @IntRange(2, 128)
-    var resolution = 30
+	@Export
+	@RegisterProperty
+	@IntRange(2, 128)
+	var resolution = 75
 
-    @Export
-    @RegisterProperty
-    var radius = 1f
+	@Export
+	@RegisterProperty
+	var radius = 1.4f
 
-    @Export
-    @RegisterProperty
-    var amplitude = 1.75f
+	@Export
+	@RegisterProperty
+	var amplitude = 1.75f
 
-    @Export
-    @RegisterProperty
-    var roughness = 0.75f
+	@Export
+	@RegisterProperty
+	var roughness = 0.75f
 
-    @Export
-    @RegisterProperty
-    var noiseCenter = Vector3(1, 1, 1)
+	@Export
+	@RegisterProperty
+	var noiseCenter = Vector3(1, 1, 1)
 
-    @Export
-    @RegisterProperty
-    @IntRange(1, 9)
-    var noiseLayers = 1
+	@Export
+	@RegisterProperty
+	@IntRange(1, 9)
+	var noiseLayers = 8
 
-    @Export
-    @RegisterProperty
-    var noiseLayerContribution = 0.5f
+	@Export
+	@RegisterProperty
+	var noiseLayerContribution = 0.67f
 
-    @Export
-    @RegisterProperty
-    var noiseLayerRoughnessMultiplier = 2.0f
+	@Export
+	@RegisterProperty
+	var noiseLayerRoughnessMultiplier = 1.67f
 
-    @Export
-    @RegisterProperty
-    var color = Color.white
+	@Export
+	@RegisterProperty
+	var minValue = 0.15f
 
-    @RegisterFunction
-    override fun _ready() {
-        shapeGenerator = ShapeGenerator(
-            radius,
-            NoiseFilter(
-                amplitude,
-                roughness.toDouble(),
-                noiseCenter,
-                noiseLayers.toLong(),
-                noiseLayerContribution.toDouble(),
-                noiseLayerRoughnessMultiplier.toDouble(),
-            )
-        )
+	@Export
+	@RegisterProperty
+	var color = Color.white
 
-        initialize()
-        generateMesh()
-    }
+	@RegisterFunction
+	override fun _ready() {
+		shapeGenerator = ShapeGenerator(
+			radius,
+			NoiseFilter(
+				amplitude,
+				roughness.toDouble(),
+				noiseCenter,
+				noiseLayers.toLong(),
+				noiseLayerContribution.toDouble(),
+				noiseLayerRoughnessMultiplier.toDouble(),
+				minValue.toDouble(),
+			)
+		)
 
-    private fun initialize() {
-        meshInstances = Array(6) {
-            val meshInstance = MeshInstance().apply {
-                materialOverride = SpatialMaterial().apply {
-                    flagsUnshaded = false
-                    albedoColor = color
-                    roughness = 0.5
-                    metallic = 0.5
-                }
-                visible
-            }
-            addChild(meshInstance)
-            meshInstance
-        }
-        terrainFaces = Array(6) {
-            TerrainFace(shapeGenerator, meshInstances[it], resolution, directions[it])
-        }
-    }
+		initialize()
+		generateMesh()
+	}
 
-    private fun generateMesh() {
-        terrainFaces.forEach(TerrainFace::constructMesh)
-    }
+	private fun initialize() {
+		meshInstances = Array(6) {
+			val meshInstance = MeshInstance().apply {
+				materialOverride = SpatialMaterial().apply {
+					flagsUnshaded = false
+					albedoColor = color
+					roughness = 0.5
+					metallic = 0.5
+				}
+				visible
+			}
+			addChild(meshInstance)
+			meshInstance
+		}
+		terrainFaces = Array(6) {
+			TerrainFace(shapeGenerator, meshInstances[it], resolution, directions[it])
+		}
+	}
+
+	private fun generateMesh() {
+		terrainFaces.forEach(TerrainFace::constructMesh)
+	}
 }

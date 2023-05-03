@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/main/kotlin/dev/gluton/planets/Main.kt" type="Script" id=1]
+[ext_resource path="res://scenes/Generators.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/main/kotlin/dev/gluton/planets/OrbitalCamera.kt" type="Script" id=3]
+[ext_resource path="res://src/main/kotlin/dev/gluton/planets/Planet.kt" type="Script" id=4]
+[ext_resource path="res://scenes/PlanetViewer.tscn" type="PackedScene" id=5]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -17,4 +20,20 @@ fov = 90.0
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.85819, 0.513332, 0, -0.513332, 0.85819, 0, 9.84836, 22.2417 )
+light_size = 0.057
 shadow_enabled = true
+shadow_bias = 0.0
+directional_shadow_mode = 0
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.05
+directional_shadow_bias_split_scale = 0.05
+directional_shadow_depth_range = 1
+
+[node name="Generators" parent="." instance=ExtResource( 2 )]
+
+[node name="PlanetViewer" parent="." instance=ExtResource( 5 )]
+noise_layers = 6
+
+[node name="Planet" type="Spatial" parent="."]
+script = ExtResource( 4 )
+noise_layers = 6

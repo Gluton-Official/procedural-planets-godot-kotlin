@@ -1,4 +1,3 @@
-//import dev.gluton.tasks.GenerateGDScripts
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -19,14 +18,5 @@ compileKotlin.kotlinOptions {
 }
 
 dependencies {
-    compileOnly("")
+    implementation(kotlin("reflect"))
 }
-
-
-//val generateGDScripts = task<GenerateGDScripts>("generateGDScripts") {
-//    scriptsDirectory.set(rootDir.resolve("scripts"))
-//}
-//
-//tasks.build {
-//    finalizedBy(generateGDScripts)
-//}

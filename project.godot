@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "dev_gluton_planets_Planet",
 "language": "Kotlin",
 "path": "res://src/main/kotlin/dev/gluton/planets/Planet.kt"
+}, {
+"base": "Node",
+"class": "dev_gluton_planets_filegen_Generators",
+"language": "Kotlin",
+"path": "res://src/main/kotlin/dev/gluton/planets/filegen/Generators.kt"
 } ]
 _global_script_class_icons={
 "dev_gluton_planets_Main": "",
 "dev_gluton_planets_OrbitalCamera": "",
-"dev_gluton_planets_Planet": ""
+"dev_gluton_planets_Planet": "",
+"dev_gluton_planets_filegen_Generators": ""
 }
 
 [application]

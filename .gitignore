@@ -5,9 +5,10 @@ build/
 !**/src/test/**/build/
 
 ### Godot ###
-/.import/
-/jre-amd64/
+.import/
+jre*/
 hs_err_pid*.log
+export/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

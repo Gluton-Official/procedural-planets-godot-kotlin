@@ -1,5 +1,6 @@
 package dev.gluton.planets.filegen
 
+import dev.gluton.planets.filegen.GeneratePlanetViewer.stringBuilder
 import godot.Object
 import godot.annotation.DoubleRange
 import godot.annotation.FloatRange
@@ -18,7 +19,9 @@ abstract class ScriptGenerator(fileName: String) {
 
     operator fun invoke() {
         GD.print("Generating ${scriptFile.absolutePath}...")
-        scriptFile.createNewFile()
+        if (scriptFile.exists()) {
+            scriptFile.delete()
+        }
         generateData()
         scriptFile.writeText(stringBuilder.toString())
         GD.print("Generated ${scriptFile.absolutePath}!")

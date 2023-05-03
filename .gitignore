@@ -13,6 +13,10 @@ hs_err_pid*.log
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
+.idea/codestream.xml
+.idea/deployment.xml
+.idea/discord.xml
+.idea/git_toolbox_prj.xml
 .idea/libraries/
 *.iws
 *.iml

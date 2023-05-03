@@ -76,7 +76,7 @@ abstract class ScriptGenerator(fileName: String) {
         }
         val godotName = camelCaseToSnakeCase(name)
         val defaultValueString = when (defaultValue) {
-            is Int, is Long, is Float, is Double -> defaultValue.toString()
+            is Int, is Long, is Float, is Double, is Boolean -> defaultValue.toString()
             is Vector3 -> "Vector3(${defaultValue.x}, ${defaultValue.y}, ${defaultValue.z})"
             is Color -> "Color(${defaultValue.r}, ${defaultValue.g}, ${defaultValue.b})"
             else -> null

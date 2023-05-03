@@ -3,6 +3,9 @@ package dev.gluton.planets
 import godot.ArrayMesh
 import godot.Mesh
 import godot.MeshInstance
+import godot.MeshTexture
+import godot.ShaderMaterial
+import godot.SpatialMaterial
 import godot.SurfaceTool
 import godot.core.PoolIntArray
 import godot.core.PoolVector3Array

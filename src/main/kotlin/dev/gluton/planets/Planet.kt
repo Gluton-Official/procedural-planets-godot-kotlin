@@ -23,19 +23,19 @@ class Planet : Spatial() {
 	@Export
 	@RegisterProperty
 	@IntRange(2, 128)
-	var resolution = 75
+	var resolution = 30
 
 	@Export
 	@RegisterProperty
-	var radius = 1.4f
+	var radius = 3f
 
 	@Export
 	@RegisterProperty
-	var amplitude = 1.75f
+	var amplitude = 1.25f
 
 	@Export
 	@RegisterProperty
-	var roughness = 0.75f
+	var roughness = 0.5f
 
 	@Export
 	@RegisterProperty
@@ -44,19 +44,60 @@ class Planet : Spatial() {
 	@Export
 	@RegisterProperty
 	@IntRange(1, 9)
-	var noiseLayers = 8
+	var noiseLayers = 6
 
 	@Export
 	@RegisterProperty
-	var noiseLayerContribution = 0.67f
+	var noiseLayerContribution = 0.42f
 
 	@Export
 	@RegisterProperty
-	var noiseLayerRoughnessMultiplier = 1.67f
+	var noiseLayerRoughnessMultiplier = 2.3f
 
 	@Export
 	@RegisterProperty
-	var minValue = 0.15f
+	var minValue = 0.67f
+
+	@Export
+	@RegisterProperty
+	var strength = 0.275f
+
+	@Export
+	@RegisterProperty
+	var enableNoiseFilterOverlay = true
+
+	@Export
+	@RegisterProperty
+	var overlayAmplitude = 0.5f
+
+	@Export
+	@RegisterProperty
+	var overlayRoughness = 0.075f
+
+	@Export
+	@RegisterProperty
+	var overlayNoiseCenter = Vector3(1, 1, 1)
+
+	@Export
+	@RegisterProperty
+	@IntRange(1, 9)
+	var overlayNoiseLayers = 6
+
+	@Export
+	@RegisterProperty
+	var overlayNoiseLayerContribution = 5.15f
+
+	@Export
+	@RegisterProperty
+	var overlayNoiseLayerRoughnessMultiplier = 1f
+
+	@Export
+	@RegisterProperty
+	var overlayMinValue = 0.1f
+
+	@Export
+	@RegisterProperty
+	var overlayStrength = 3.8f
 
 	@Export
 	@RegisterProperty
@@ -74,7 +115,19 @@ class Planet : Spatial() {
 				noiseLayerContribution.toDouble(),
 				noiseLayerRoughnessMultiplier.toDouble(),
 				minValue.toDouble(),
-			)
+				strength,
+			),
+			enableNoiseFilterOverlay,
+			noiseFilterOverlay = NoiseFilter(
+				overlayAmplitude,
+				overlayRoughness.toDouble(),
+				overlayNoiseCenter,
+				overlayNoiseLayers.toLong(),
+				overlayNoiseLayerContribution.toDouble(),
+				overlayNoiseLayerRoughnessMultiplier.toDouble(),
+				overlayMinValue.toDouble(),
+				overlayStrength,
+			),
 		)
 
 		initialize()

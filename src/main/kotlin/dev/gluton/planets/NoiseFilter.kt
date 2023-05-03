@@ -11,17 +11,19 @@ class NoiseFilter(
     private val layerContribution: Double,
     private val layerRoughnessMultiplier: Double,
     private val minValue: Double,
+    private val strength: Float,
 ) {
     private val noise = OpenSimplexNoise().apply {
         octaves = layers
-        period = this@NoiseFilter.roughness
+        period = roughness
         persistence = layerContribution
         lacunarity = layerRoughnessMultiplier
     }
 
     fun evaluate(point: Vector3): Float {
-        var noiseValue = noise.getNoise3dv(point + center) * amplitude
-        noiseValue = (noiseValue - minValue).coerceAtLeast(0.0)
-        return (noiseValue.toFloat() + 1) / 2
+        val noiseAtPoint = noise.getNoise3dv(point + center)
+        val scaledNoise = (noiseAtPoint + 1) / 2 * amplitude
+        val noiseValue = (scaledNoise - minValue).coerceAtLeast(0.0)
+        return noiseValue.toFloat() * strength
     }
 }

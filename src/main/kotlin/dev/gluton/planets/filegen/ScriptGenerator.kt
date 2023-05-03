@@ -66,6 +66,7 @@ abstract class ScriptGenerator(fileName: String) {
                     ", $start, $end" + if (step != -1.0) ", $step" else ""
                 } ?: "")
             }
+            is Color -> ""
             else -> {
                 defaultValue?.let {
                     it::class.simpleName!!
@@ -80,7 +81,7 @@ abstract class ScriptGenerator(fileName: String) {
             else -> null
         }
         stringBuilder.apply {
-            append("export($godotTypeHint) var $godotName")
+            append("export${if (godotTypeHint.isNotBlank()) "($godotTypeHint)" else ""} var $godotName")
             defaultValueString?.let {
                 append(" = $it")
             }

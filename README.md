@@ -3,6 +3,8 @@
 Procedural planet generation using cube mapping and layered noise.
 A fragment shader is used to apply color based on the elevation of terrain.
 
+![Preview](/screenshots/gradient_texture_sampling.png)
+
 ## Setup
 
 ### Requirements
